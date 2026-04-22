@@ -3,6 +3,7 @@ import { AVATARS } from "../constants";
 import { Avatar, Player } from "../types";
 import { Button } from "./ui/Button";
 import { motion } from "motion/react";
+import { soundManager } from "../lib/sounds";
 
 type Props = {
   onComplete: (p1: Avatar, p2: Avatar) => void;
@@ -38,6 +39,9 @@ export default function AvatarSelect({ onComplete }: Props) {
 
   const handleSelect = (avatar: Avatar) => {
     if (player1?.id === avatar.id || player2?.id === avatar.id) return; // already picked
+
+    // Play select sound
+    soundManager.play('select');
 
     // Assign a random animation type (0, 1, or 2)
     setAnimVariants(prev => ({ ...prev, [avatar.id]: Math.floor(Math.random() * 3) }));

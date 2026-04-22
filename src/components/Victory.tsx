@@ -3,6 +3,7 @@ import confetti from "canvas-confetti";
 import { Avatar } from "../types";
 import { Button } from "./ui/Button";
 import { motion } from "motion/react";
+import { soundManager } from "../lib/sounds";
 
 type Props = {
   p1Avatar: Avatar;
@@ -19,6 +20,9 @@ export default function Victory({ p1Avatar, p2Avatar, p1Score, p2Score, onRestar
   const loserAvatar = winner === 1 ? p2Avatar : p1Avatar;
 
   useEffect(() => {
+    // Play win sound
+    soundManager.play('win');
+
     // Fireworks effect!
     const duration = 5000;
     const animationEnd = Date.now() + duration;

@@ -4,6 +4,7 @@ import { RANKS, SUITS } from "../constants";
 import Card from "./Card";
 import { Button } from "./ui/Button";
 import { motion, LayoutGroup, AnimatePresence } from "motion/react";
+import { soundManager } from "../lib/sounds";
 
 const SCORE_ANIMS = [
   { rotateX: [0, -360], scale: [1, 1.4, 1], y: [0, -20, 0] },
@@ -150,6 +151,7 @@ export default function GameBoard({ p1Avatar, p2Avatar, difficulty, level, isMem
 
       if (c1.rank === c2.rank) {
         // Match!
+        soundManager.play('match');
         setTimeout(() => {
           const matchedCards = [...newCards];
           matchedCards[idx1].isMatched = true;
